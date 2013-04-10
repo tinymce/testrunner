@@ -64,7 +64,7 @@ This way `TestRunner` can be included into an arbitrary project as a submodule u
 <script src="http://code.jquery.com/qunit/qunit-git.js"></script>
 
 <!-- testrunner -->
-<script src="testrunner/js/reporter.js"></script>
+<script src="../js/reporter.js"></script>
 
 <script type="text/javascript">
 
