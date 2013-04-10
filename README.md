@@ -38,7 +38,7 @@ This way `TestRunner` can be included into an arbitrary project as a submodule u
 </html>
 ```
 
-*tests.js*
+*project/tests.js*
 
 ```javascript
 {
