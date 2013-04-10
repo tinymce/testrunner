@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Test File</title>
+
+<!-- qunit -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-git.css" type="text/css" />
+<script src="http://code.jquery.com/qunit/qunit-git.js"></script>
+
+<!-- testrunner -->
+<script src="../testrunner/reporter.js"></script>
+
+<script type="text/javascript">
+
+QUnit.config.reorder = false;
+
+module("Example", {
+	setup: function() {
+
+	},
+
+	teardown: function() {
+	}
+});
+
+
+test("Are E.T.s are among us?", function() {
+	ok(!false, "4 sure.");
+});
+
+</script>
+</head>
+<body>
+	<h1 id="qunit-header">Test Suite</h1>
+	<h2 id="qunit-banner"></h2>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests">
+	</ol>
+    <div id="qunit-fixture"></div>
+</body>
+</html>
