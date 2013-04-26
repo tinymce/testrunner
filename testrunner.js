@@ -1,7 +1,7 @@
 /*jshint evil:true */
 
 // Quick and dirty testrunner hack, it's ugly but it works
-(function() {
+(function(self) {
 	function TestRunner() {
 		var suites = [], suiteUrls = [], actions = {};
 		var started, currentTest, testUrls = [], globalStats = {};
@@ -494,4 +494,4 @@
 	};
 
 	self.TestRunner = testRunner;
-})();
+})(window);
