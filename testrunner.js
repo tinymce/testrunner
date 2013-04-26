@@ -1,3 +1,5 @@
+/*jshint evil:true */
+
 // Quick and dirty testrunner hack, it's ugly but it works
 (function() {
 	function TestRunner() {
