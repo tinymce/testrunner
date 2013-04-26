@@ -187,6 +187,8 @@
 		});
 
 		addAction("select-failed", function(elm) {
+			var si, ti, tests;
+
 			toggleCheckboxes(get('s' + elm.getAttribute("data-suite")), false);
 			reset();
 
@@ -278,7 +280,7 @@
 			document.body.appendChild(div);
 
 			get('sidebar').onclick = function(e) {
-				var target;
+				var target, action;
 
 				e = e || event;
 				target = e.target || e.srcElement;
