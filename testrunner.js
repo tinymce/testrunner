@@ -88,22 +88,16 @@
 			}
 
 			setHashData({
-				min: get('min').checked,
-				jsrobot: get('jsrobot').checked,
+				src: getSourceToLoad(),
 				tests: hasDisabled ? states.join('') : null
 			});
 		}
 
 		function hashToStates() {
-			var i, data = getHashData(location.hash), checkboxes;
+			var i, data = getHashData(location.hash), checkboxes, source;
 
-			if (typeof(data.min) != "undefined") {
-				get('min').checked = data.min === "true";
-			}
-
-			if (typeof(data.jsrobot) != "undefined") {
-				get('jsrobot').checked = data.jsrobot === "true";
-			}
+			source = data.src || 'min';
+			get('source-' + source).checked = true;
 
 			if (typeof(data.tests) != "undefined") {
 				checkboxes = get('tests').getElementsByTagName("input");
@@ -149,7 +143,7 @@
 			// Start first test
 			currentTest = testUrls.shift();
 			if (currentTest) {
-				get('testview').src = currentTest.url + "?min=" + get('min').checked;
+				get('testview').src = currentTest.url + "?src=" + getSourceToLoad();
 			}
 
 			get('coverage').disabled = true;
@@ -227,8 +221,9 @@
 			html += '<div id="controls" class="controls">';
 			html += '<div>';
 			html += '<button id="start" data-action="start">Start</button>';
-			html += '<label><input id="min" type="checkbox" checked>Minified</label>';
-			html += '<label><input id="jsrobot" type="checkbox">JSRobot</label>';
+			html += '<label><input id="source-min" name="source" type="radio" checked>Min</label>';
+			html += '<label><input id="source-dev" name="source" type="radio">Dev</label>';
+			html += '<label><input id="source-cov" name="source" type="radio">Cov</label>';
 			html += '<button id="coverage" data-action="coverage" disabled>Coverage</button>';
 			html += '</div>';
 			html += '<div>';
@@ -364,6 +359,20 @@
 			}
 		}
 
+		function getSourceToLoad() {
+			var radios, source = 'min';
+
+			radios = document.getElementsByName("source");
+			for (var i = 0; i < radios.length; i++) {
+				if (radios[i].checked) {
+					source = radios[i].id.replace(/^source-/, '');
+					break;
+				}
+			}
+			return source;
+		}
+
+
 		function updateGlobalStatus() {
 			get('gstatus').innerHTML = 'Total: ' + globalStats.total + ", Failed: " + globalStats.failed;
 			addClass(get("controls"), globalStats.failed > 0 ? "failed" : "");
@@ -378,14 +387,8 @@
 					currentTestElm = get('t' + currentTest.suiteIndex + '-' + currentTest.testIndex);
 					currentTestElm.scrollIntoView(false);
 
-					if (nextTest.jsrobot === true && !get('jsrobot').checked) {
-						get('s' + currentTest.suiteIndex + '-' + currentTest.testIndex).innerHTML = 'Skipped';
-						addClass(currentTestElm, "skipped");
-						runNextTest();
-					} else {
-						addClass(currentTestElm, "running");
-						get('testview').src = nextTest.url + "?min=" + get('min').checked;
-					}
+					addClass(currentTestElm, "running");
+					get('testview').src = nextTest.url + "?src=" + getSourceToLoad();
 				} else {
 					stop();
 				}
