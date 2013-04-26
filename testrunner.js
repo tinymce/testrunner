@@ -286,10 +286,10 @@
 					action(target);
 				} else if (target.className === 'test-trigger') {
 					get(target.getAttribute('target')).src = target.href + '?src=' + getSourceToLoad();
+					return false; // prevent default action
 				}
 
 				statesToHash();
-				return false;
 			};
 		}
 
