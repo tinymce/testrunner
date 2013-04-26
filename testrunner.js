@@ -469,7 +469,7 @@
 			coverView.style.height = (viewPortH - 60) + 'px';
 			coverView.style.display = 'block';
 
-			coverView.getElementsByTagName('iframe')[0].src = 'coverage/index.html';
+			coverView.getElementsByTagName('iframe')[0].src = 'js/coverage/index.html';
 		}
 
 		function hideCoverage() {
