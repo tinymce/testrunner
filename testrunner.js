@@ -254,7 +254,7 @@
 						'<div id="t' + si + '-' + ti + '" class="test">' +
 							'<span id="s' + si + '-' + ti + '" class="stats">Running</span>' +
 							'<input id="c' + si + '-' + ti + '" type="checkbox" checked />' +
-							'<a href="' + tests[ti].url + '" target="testview">' + tests[ti].title + '</a>' +
+							'<a href="' + tests[ti].url + '" target="testview" class="test-trigger">' + tests[ti].title + '</a>' +
 						'</div>'
 					);
 				}
@@ -284,9 +284,12 @@
 
 				if ((action = actions[target.getAttribute("data-action")])) {
 					action(target);
+				} else if (target.className === 'test-trigger') {
+					get(target.getAttribute('target')).src = target.href + '?src=' + getSourceToLoad();
 				}
 
 				statesToHash();
+				return false;
 			};
 		}
 
