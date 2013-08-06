@@ -77,7 +77,7 @@ module("Example", {
 });
 
 
-test("Are E.T.s are among us?", function() {
+test("Are E.T.s among us?", function() {
 	ok(!false, "4 sure.");
 });
 
