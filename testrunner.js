@@ -300,6 +300,21 @@
 		function loadSuite(url, callback) {
 			var xhr;
 
+			function getNativeXHR() {
+				if (window.XMLHttpRequest) {
+					return new window.XMLHttpRequest();
+				} else {
+					return (function() {
+						var progIDs = ['Msxml2.XMLHTTP.6.0', 'Microsoft.XMLHTTP']; // if 6.0 available, use it, otherwise failback to default 3.0
+						for (var i = 0; i < progIDs.length; i++) {
+							try {
+								return new ActiveXObject(progIDs[i]);
+							} catch (ex) {}
+						}
+					})();
+				}
+			}
+
 			function ready() {
 				if (xhr.readyState == 4) {
 					callback(eval("(" + xhr.responseText + ")"), url);
@@ -309,7 +324,7 @@
 				}
 			}
 
-			xhr = new XMLHttpRequest();
+			xhr = getNativeXHR();
 
 			if (xhr) {
 				xhr.open('GET', url, true);
